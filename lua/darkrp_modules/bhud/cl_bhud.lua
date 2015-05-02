@@ -1,3 +1,5 @@
+-- #NoSimplerr#
+
 local hideHUDElements = {
 	["DarkRP_HUD"] = true,
 	["DarkRP_EntityDisplay"] = false,
@@ -45,8 +47,8 @@ local Health = 0
 local Armor = 0
 local Sprint = 0
 local Hunger = 0
-local LP = LocalPlayer()
 local x, y = 20, ScrH() - 20
+
 
 --// icons Text
 local icon_ammo = Material("bhud/ammo.png", "noclamp smooth")
@@ -62,18 +64,19 @@ local icon_armor = Material("bhud/armor.png", "noclamp smooth")
 local icon_health = Material("bhud/health.png", "noclamp smooth")
 local icon_hunger = Material("bhud/hunger.png", "noclamp smooth")
 local icon_sprint = Material("bhud/sprint.png", "noclamp smooth")
+local LP = LocalPlayer()
 
 
 local function getAmmo()
 	local weap = LP:GetActiveWeapon()
-	if weap:GetClass() == 'weapon_physgun' or weap:GetClass() == 'weapon_physcannon' then return "" end
 	if not weap or not LP:Alive() then return 0 end
+	if weap:GetClass() == 'weapon_physgun' or weap:GetClass() == 'weapon_physcannon' then return "" end
 	local ammo_inv = weap:Ammo1() or 0
 	local ammo_clip = weap:Clip1() or 0
 	if ammo_clip == -1 then
-	return ""
+		return ""
 	else
-	return ammo_clip .. " | " .. ammo_inv
+		return ammo_clip .. " | " .. ammo_inv
 	end
 end
 
@@ -84,7 +87,8 @@ local function Base()
 end
 local function drawTextInfo()
 	--// Nickname
-	draw.SimpleText(LP:Nick(), "bHUD_22", x + 10 + 20,y - 180 + 4, Color(0,0,0),  TEXT_ALIGN_LEFT , TEXT_ALIGN_LEFT )
+	local nick = LP:Nick() or ""
+	draw.SimpleText(nick, "bHUD_22", x + 10 + 20,y - 180 + 4, Color(0,0,0),  TEXT_ALIGN_LEFT , TEXT_ALIGN_LEFT )
 	
 	--// DarkRP
 	local dosh = DarkRP.formatMoney(LP:getDarkRPVar( "money" ) or 0)
@@ -182,14 +186,17 @@ local function drawHunger()
 end
 
 local function hudPaint()
+	if !IsValid(LP) then LP = LocalPlayer() return end
 	Base()
-	drawTextInfo()
 	drawIconInfo()
 	drawLicense()
 	drawHealth()
 	drawArmor()
 	drawSprint()
 	drawHunger()
+	drawTextInfo()
+
 end
 
+--// stupid shit loads to early...
 hook.Add("HUDPaint", "DarkRP_Mod_HUDPaint", hudPaint)
