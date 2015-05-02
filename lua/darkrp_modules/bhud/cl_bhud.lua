@@ -1,4 +1,3 @@
--- #NoSimplerr#
 local hideHUDElements = {
 	["DarkRP_HUD"] = true,
 	["DarkRP_EntityDisplay"] = false,
