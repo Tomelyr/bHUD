@@ -153,7 +153,6 @@ end
 local function drawSprint()
 	if !bHUD_Sprint then return end
 	Sprint = math.min(100, (Sprint == LP:GetNWInt( "tcb_stamina") and Sprint) or Lerp(0.1, Sprint, LP:GetNWInt( "tcb_stamina")))
-	Sprint = 100
 	local yoffset = 130
 	--// Outlined Rect
 	draw.RoundedBox(0, x + sprintOffset, y - yoffset, 30, 1, Color(0,0,0)) --top
@@ -169,7 +168,6 @@ end
 local function drawHunger()
 	if !bHUD_Hunger then return end
 	Hunger = math.min(100, (Hunger == LP:getDarkRPVar( "Energy" ) and Hunger) or Lerp(0.1, Hunger, LP:getDarkRPVar( "Energy" )))
-	Hunger = 100
 	local yoffset = 130
 	--// Outlined Rect
 	draw.RoundedBox(0, x + hungerOffset, y - yoffset, 30, 1, Color(0,0,0)) --top
