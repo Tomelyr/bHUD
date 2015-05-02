@@ -26,9 +26,20 @@ size = 18,
 weight = 500,
 antialias = true,
 } )
+--// maths
+local forth = 120 + 30 + 15 + 30 + 15 + 30 + 15
+local third = 120 + 30 + 15 + 30 + 15
+local second = 120 + 30 + 15
+local first = 120
+
 --// config
-local bHUD_Hunger = false
-local bHUD_Sprint = false
+local bHUD_Hunger = false --Active the DarkRP Hungerbar
+local bHUD_Sprint = false --Active the TCB SprintBar
+--// In Which order the Bars appear (left = first, right = forth)
+local healthOffset = forth 
+local armoroffset = third
+local sprintOffset = second
+local hungerOffset = first
 
 --// locals
 local Health = 0
@@ -53,16 +64,6 @@ local icon_health = Material("bhud/health.png", "noclamp smooth")
 local icon_hunger = Material("bhud/hunger.png", "noclamp smooth")
 local icon_sprint = Material("bhud/sprint.png", "noclamp smooth")
 
---// maths
-local forth = 120 + 30 + 15 + 30 + 15 + 30 + 15
-local third = 120 + 30 + 15 + 30 + 15
-local second = 120 + 30 + 15
-local first = 120
-
-local healthOffset = forth
-local armoroffset = third
-local sprintOffset = second
-local hungerOffset = first
 
 local function getAmmo()
 	local weap = LP:GetActiveWeapon()
