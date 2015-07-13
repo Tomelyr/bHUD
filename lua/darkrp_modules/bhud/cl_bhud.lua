@@ -69,6 +69,7 @@ local LP = LocalPlayer()
 
 local function getAmmo()
 	if !LP:Alive() then return -1 end
+	if !IsValid(LP:GetActiveWeapon()) then return "" end
 	local weap = LP:GetActiveWeapon()
 	if not weap then return 0 end
 	if weap:GetClass() == 'weapon_physgun' or weap:GetClass() == 'weapon_physcannon' then return "" end
